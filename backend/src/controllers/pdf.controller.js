@@ -2,6 +2,16 @@ import { v4 as uuidv4 } from "uuid";
 import { PDF } from "../models/pdf.model.js";
 import { uploadFile, getDownloadUrl, deleteFile } from "../services/storage.service.js";
 
+
+// ─── cloudinary ───────────────────────────────────────────────────────────────────
+const cloudinary = require("../config/cloudinary");
+
+const result = await cloudinary.uploader.upload(req.file.path, {
+  resource_type: "raw",
+  folder: "pyqs",
+});
+
+console.log(result.secure_url);
 // ─── Upload ───────────────────────────────────────────────────────────────────
 export const uploadPDF = async (req, res, next) => {
   try {
